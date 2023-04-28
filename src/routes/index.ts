@@ -25,13 +25,6 @@ export default new VueRouter({
       ) {
         bus.$emit('on:progress');
         next();
-        // try {
-        //   await store.dispatch('FETCH_LIST', routeTo.name);
-        //   next();
-        // } catch (error) {
-        //   new Error('failed to fetch news items');
-        //   // next('/error');
-        // }
       },
     },
     {
@@ -44,10 +37,7 @@ export default new VueRouter({
         next: NavigationGuardNext<Vue>
       ) {
         bus.$emit('on:progress');
-        store
-          .dispatch('FETCH_LIST', routeTo.name)
-          .then(() => next())
-          .catch(() => new Error('failed to fetch news items'));
+        next();
       },
     },
     {
@@ -60,10 +50,7 @@ export default new VueRouter({
         next: NavigationGuardNext<Vue>
       ) {
         bus.$emit('on:progress');
-        store
-          .dispatch('FETCH_LIST', routeTo.name)
-          .then(() => next())
-          .catch(() => new Error('failed to fetch news items'));
+        next();
       },
     },
     {
@@ -76,10 +63,14 @@ export default new VueRouter({
       ) {
         bus.$emit('on:progress');
         const itemId = routeTo.params.id;
-        store
-          .dispatch('FETCH_ITEM', itemId)
-          .then(() => next())
-          .catch(() => new Error('failed to fetch item details'));
+        try {
+          store
+            .dispatch('FETCH_ITEM', itemId)
+            .then(() => next())
+            .catch(() => new Error('failed to fetch item details'));
+        } catch (error) {
+          console.log(error);
+        }
       },
     },
     {
@@ -92,10 +83,14 @@ export default new VueRouter({
       ) {
         bus.$emit('on:progress');
         const itemId = routeTo.params.id;
-        store
-          .dispatch('FETCH_USER', itemId)
-          .then(() => next())
-          .catch(() => new Error('failed to fetch user profile'));
+        try {
+          store
+            .dispatch('FETCH_USER', itemId)
+            .then(() => next())
+            .catch(() => new Error('failed to fetch user profile'));
+        } catch (error) {
+          console.log(error);
+        }
       },
     },
   ],

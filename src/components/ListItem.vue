@@ -1,35 +1,35 @@
 <template>
   <ul class="news-list">
-    <li v-for="news in items" :key="news.id" class="post">
+    <li v-for="list in items" :key="list.id" class="post">
       <div class="points">
-        {{ news.points || 0 }}
+        {{ list.points || 0 }}
       </div>
       <div>
         <p class="news-title">
-          <template v-if="news.domain">
-            <a :href="news.url">{{ news.title }}</a
-            ><small class="link-text" v-if="news.domain"
-              >({{ news.domain }})</small
+          <template v-if="list.domain">
+            <a :href="list.url">{{ list.title }}</a
+            ><small class="link-text" v-if="list.domain"
+              >({{ list.domain }})</small
             >
           </template>
           <template v-else>
-            <router-link :to="`/item/${news.id}`">{{ news.title }}</router-link
+            <router-link :to="`/item/${list.id}`">{{ list.title }}</router-link
             ><small
-              ><a class="link-text" :href="news.domain" v-if="news.domain"
-                >({{ news.domain }})</a
+              ><a class="link-text" :href="list.domain" v-if="list.domain"
+                >({{ list.domain }})</a
               ></small
             >
           </template>
         </p>
-        <small v-if="news.user" class="link-text">
+        <small v-if="list.user" class="link-text">
           by
-          <router-link :to="`/user/${news.user}`" class="link-text">{{
-            news.user
+          <router-link :to="`/user/${list.user}`" class="link-text">{{
+            list.user
           }}</router-link>
         </small>
-        <small v-if="news.time_ago" class="link-text">
-          <!-- {{ news.time_ago }} -->
-          {{ timeAgo(news) }}
+        <small v-if="list.time_ago" class="link-text">
+          <!-- {{ list.time_ago }} -->
+          {{ timeAgo(list) }}
         </small>
       </div>
     </li>
@@ -37,27 +37,21 @@
 </template>
 
 <script lang="ts">
-import { NewsItem } from '@/api';
+import { ListItems } from '@/api';
 import Vue from 'vue';
 import { PropType } from 'vue/types/v3-component-props';
 export default Vue.extend({
   props: {
     items: {
-      type: Array as PropType<NewsItem[]>,
+      type: Array as PropType<ListItems[]>,
       required: true,
     },
   },
 
   methods: {
-    timeAgo(news: NewsItem): string {
-      return news.time_ago.concat(', 2023');
+    timeAgo(list: ListItems): string {
+      return list.time_ago.concat(', 2023');
     },
-  },
-
-  computed: {
-    // timeAgo(): string {
-    //   return this.items[0].time_ago.concat();
-    // },
   },
 });
 </script>

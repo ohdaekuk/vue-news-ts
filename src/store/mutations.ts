@@ -1,13 +1,25 @@
-import { NewsItem } from '@/api';
+import { ListItems } from '@/api';
 import { RootState } from './state';
 
 enum MutationTypes {
   SET_NEWS = 'SET_NEWS',
+  SET_LIST = 'SET_LIST',
+  SET_USER = 'SET_USER',
+  SET_ITEM = 'SET_ITEM',
 }
 
 const mutations = {
-  [MutationTypes.SET_NEWS](state: RootState, news: NewsItem[]) {
-    state.news = news;
+  // [MutationTypes.SET_NEWS](state: RootState, news: ListItems[]) {
+  //   state.news = news;
+  // },
+  [MutationTypes.SET_LIST](state: RootState, list: ListItems[]) {
+    state.list = list;
+  },
+  [MutationTypes.SET_USER](state: RootState, user: ListItems) {
+    state.user = user;
+  },
+  [MutationTypes.SET_ITEM](state: RootState, item: ListItems) {
+    state.item = item;
   },
 };
 

@@ -1,9 +1,30 @@
-import { NewsItem } from '@/api';
+import { ListItems } from '@/api';
 import { RootState } from './state';
 
 const getters = {
-  fetchedNews(state: RootState): NewsItem[] {
+  fetchedNews(state: RootState): ListItems[] {
     return state.news;
+  },
+  fetchedUser(state: RootState) {
+    return state.user;
+  },
+  fetchedItem(state: RootState) {
+    return state.item;
+  },
+  userName(state: RootState) {
+    return state.item.user;
+  },
+  userContent(state: RootState) {
+    return state.item.content;
+  },
+  userQuestion(state: RootState) {
+    return state.item.title;
+  },
+  userTimeAgo(state: RootState) {
+    return state.item.time_ago;
+  },
+  contentPoints(state: RootState) {
+    return state.item.points;
   },
 };
 

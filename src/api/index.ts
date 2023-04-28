@@ -6,11 +6,13 @@ const api = {
   jobs: 'https://api.hnpwa.com/v0/jobs/1.json',
   user: 'https://api.hnpwa.com/v0/user/',
   item: 'https://api.hnpwa.com/v0/item/',
+  basic: 'https://api.hnpwa.com/v0/',
 };
 
-interface NewsItem {
+interface ListItems {
   comments_count: number;
-  domain: string;
+  content?: string;
+  domain?: string;
   id: number;
   points: number;
   time: number;
@@ -21,17 +23,17 @@ interface NewsItem {
   user: string;
 }
 
-function fetchNews(): AxiosPromise<NewsItem[]> {
-  return axios.get(api.news);
-}
+// function fetchNews(): AxiosPromise<ListItems[]> {
+//   return axios.get(api.news);
+// }
 
-function fetchAsk() {
-  return axios.get(api.ask);
-}
+// function fetchAsk(): AxiosPromise<ListItems[]> {
+//   return axios.get(api.ask);
+// }
 
-function fetchJobs() {
-  return axios.get(api.jobs);
-}
+// function fetchJobs(): AxiosPromise<ListItems[]> {
+//   return axios.get(api.jobs);
+// }
 
 function fetchUser(id: string) {
   const url = `${api.user}${id}.json`;
@@ -43,17 +45,17 @@ function fetchItem(id: string) {
   return axios.get(url);
 }
 
-function fetchList(type: string) {
-  const url = `https://api.hnpwa.com/v0/${type}/1.json`;
+function fetchList(type: string): AxiosPromise<ListItems[]> {
+  const url = `${api.basic}${type}/1.json`;
   return axios.get(url);
 }
 
 export {
-  fetchNews,
-  fetchAsk,
-  fetchJobs,
+  // fetchNews,
+  // fetchAsk,
+  // fetchJobs,
   fetchUser,
   fetchItem,
   fetchList,
-  NewsItem,
+  ListItems,
 };

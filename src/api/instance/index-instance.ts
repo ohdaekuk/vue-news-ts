@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { setRequestOptions, setResponseOptions } from './intercepter.js';
+import { setRequestOptions, setResponseOptions } from './intercepter';
 
 const APP_BASE_URI = 'https://api.hnpwa.com/v0/';
 const options = {};

@@ -1,13 +1,14 @@
 <template>
   <div>
-    <ListItem :items="newsItems"></ListItem>
+    <ListItem :items="ListItems"></ListItem>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { fetchNews, NewsItem } from '@/api';
+import { ListItems } from '@/api';
 import ListItem from '../components/ListItem.vue';
+import { ActionTypes } from '@/store/actions';
 
 export default Vue.extend({
   components: {
@@ -16,14 +17,23 @@ export default Vue.extend({
 
   data() {
     return {
-      newsItems: [] as NewsItem[],
+      ListItems: [] as ListItems[],
     };
   },
 
   methods: {
     async fetchNewsItmes() {
-      const response = await fetchNews();
-      this.newsItems = response.data;
+      const pageName = this.$route.name as string;
+
+      try {
+        const response = await this.$store.dispatch(
+          ActionTypes.FETCH_LIST,
+          pageName
+        );
+        this.ListItems = response;
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 
